@@ -1,7 +1,7 @@
-import SwiftUI
+﻿import SwiftUI
 
 struct ContentView: View {
-    @AppStorage("dshURL") private var savedURL: String = ""
+    @AppStorage("dshURL") private var savedURL: String = "http://192.168.1.9:3081"
     @State private var input: String = ""
     @State private var target: URL? = nil
 
@@ -29,12 +29,12 @@ struct ContentView: View {
                 .font(.system(size: 64))
                 .foregroundStyle(.tint)
             Text("连接 DSH").font(.title2).bold()
-            Text("填电脑上 DSH 的地址（局域网、内网穿透或中转地址都行）")
+            Text("直连你电脑上的口袋（DSH Pocket）。默认是局域网入口，人在外面就改成公网地址")
                 .font(.footnote)
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 32)
-            TextField("http://192.168.1.9:19387", text: $input)
+            TextField("http://192.168.1.9:3081", text: $input)
                 .textInputAutocapitalization(.never)
                 .autocorrectionDisabled()
                 .keyboardType(.URL)

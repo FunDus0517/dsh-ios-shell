@@ -22,7 +22,7 @@ targets:
     info:
       path: Sources/Info.plist
       properties:
-        CFBundleDisplayName: DSH
+        CFBundleDisplayName: 口袋
         UILaunchScreen: {}
         UIUserInterfaceStyle: Automatic
         # 允许 http / 自签证书的局域网地址（DSH 局域网模式就是 https+自签）
