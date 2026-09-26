@@ -8,19 +8,31 @@ struct WebScreen: View {
     @State private var reloadID = UUID()
 
     var body: some View {
-        WebView(url: url, reloadID: reloadID)
-            .ignoresSafeArea(edges: .bottom)
-            .toolbar {
-                ToolbarItemGroup(placement: .bottomBar) {
-                    Button { onChangeAddress() } label: {
-                        Label("地址", systemImage: "globe")
-                    }
-                    Spacer()
-                    Button { reloadID = UUID() } label: {
-                        Label("刷新", systemImage: "arrow.clockwise")
-                    }
-                }
+        VStack(spacing: 0) {
+            WebView(url: url, reloadID: reloadID)
+            bottomBar
+        }
+    }
+
+    // 不用 .toolbar：它需要外层有 NavigationStack 才会渲染，这里直接自绘底栏更可靠
+    private var bottomBar: some View {
+        HStack {
+            Button {
+                onChangeAddress()
+            } label: {
+                Label("地址", systemImage: "globe")
             }
+            Spacer()
+            Button {
+                reloadID = UUID()
+            } label: {
+                Label("刷新", systemImage: "arrow.clockwise")
+            }
+        }
+        .font(.subheadline)
+        .padding(.horizontal, 28)
+        .padding(.top, 8)
+        .background(.bar)
     }
 }
 
