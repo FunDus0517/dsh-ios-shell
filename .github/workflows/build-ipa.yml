@@ -1,8 +1,11 @@
-name: build-ipa
+﻿name: build-ipa
 
 on:
   push:
   workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   build:
@@ -45,3 +48,14 @@ jobs:
           name: DSHShell-unsigned-ipa
           path: DSHShell.ipa
           if-no-files-found: error
+
+      # 额外发一份 Release 附件：公开仓库的 release 资产无需登录即可下载，
+      # 这样即使 github.com 被墙也能从 objects.githubusercontent.com 取到 IPA
+      - name: Publish release asset
+        run: |
+          gh release delete latest-build --yes --cleanup-tag || true
+          gh release create latest-build DSHShell.ipa \
+            --title "DSHShell unsigned IPA (latest build)" \
+            --notes "Unsigned IPA built by GitHub Actions. Sideload with Sideloadly/AltStore (re-sign with your own Apple ID)."
+        env:
+          GH_TOKEN: ${{ github.token }}
