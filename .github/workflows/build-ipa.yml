@@ -23,7 +23,7 @@ jobs:
         run: |
           xcodebuild \
             -project DSHShell.xcodeproj \
-            -target DSHShell \
+            -scheme DSHShell \
             -sdk iphoneos \
             -configuration Release \
             -derivedDataPath build \

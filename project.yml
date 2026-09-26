@@ -1,4 +1,4 @@
-name: DSHShell
+﻿name: DSHShell
 options:
   bundleIdPrefix: com.dshshell
   deploymentTarget:
@@ -38,3 +38,13 @@ targets:
           - UIInterfaceOrientationPortraitUpsideDown
           - UIInterfaceOrientationLandscapeLeft
           - UIInterfaceOrientationLandscapeRight
+
+schemes:
+  DSHShell:
+    build:
+      targets:
+        DSHShell: all
+    run:
+      config: Release
+    archive:
+      config: Release
