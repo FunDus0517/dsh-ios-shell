@@ -40,7 +40,10 @@ jobs:
       - name: Package unsigned IPA
         run: |
           set -e
-          APP=$(find "$HOME/Library/Developer/Xcode/DerivedData" -type d -name "DSHShell.app" -path "*Release-iphoneos*" | head -1)
+          echo "--- 搜索构建产物 ---"
+          find "$HOME/Library/Developer/Xcode/DerivedData" -name "*.app" -maxdepth 6 -type d 2>/dev/null | head -20
+          APP=$(find "$HOME/Library/Developer/Xcode/DerivedData" -name "DSHShell.app" -type d 2>/dev/null | head -1)
+          if [ -z "$APP" ]; then APP=$(find "$PWD" -name "DSHShell.app" -type d 2>/dev/null | head -1); fi
           echo "APP=$APP"
           test -n "$APP"
           test -d "$APP"
